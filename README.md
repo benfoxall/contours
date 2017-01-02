@@ -1,4 +1,4 @@
-# Contours
+# Contours [![Build Status](https://travis-ci.org/benfoxall/contours.svg?branch=master)](https://travis-ci.org/benfoxall/contours)
 
 This is a basic script for pulling out contours/regions from an image.
 
