@@ -11,6 +11,21 @@ exports.square = format([
   '____'
 ])
 
+exports.squares = format([
+  '________',
+  '_AA_____',
+  '_AA__BB_',
+  '_____BB_',
+  '________'
+])
+
+
+exports.squares_edge = format([
+  'XX___',
+  'XX_BB',
+  '___BB'
+])
+
 
 exports.tri = format([
   '______________',

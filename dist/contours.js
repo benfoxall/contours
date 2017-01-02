@@ -34,15 +34,29 @@ var traceContour = function (imageData, i) {
 // list of neighbours to visit
 var neighbours = function (image, i, start) {
   var w = image.width;
+
+  var mask = [];
+
+  if((i % w) === 0) {
+    mask[0] = mask[6] = mask[7] = -1;
+  }
+
+  if((i+1 % w) === 0) {
+    mask[2] = mask[3] = mask[4] = -1;
+  }
+
+  // hack - vertical edging matters less because
+  // it will get ignored by matching it to the source
+
   return offset([
-    i - w - 1,
-    i - w,
-    i - w + 1,
-    i + 1,
-    i + w + 1,
-    i + w,
-    i + w - 1,
-    i - 1
+    mask[0] || i - w - 1,
+    mask[1] || i - w,
+    mask[2] || i - w + 1,
+    mask[3] || i + 1,
+    mask[4] || i + w + 1,
+    mask[5] || i + w,
+    mask[6] || i + w - 1,
+    mask[7] || i - 1
   ], start)
 };
 
@@ -53,13 +67,17 @@ var offset = function (array, by) { return array.map( function (_v, i) { return 
 function contourFinder (imageData) {
 
   var contours = [];
+  var seen = [];
 
   for (var i = 0; i < imageData.data.length; i++) {
-    if(imageData.data[i * 4]) {
+    if(imageData.data[i * 4] && ! seen[i]) {
+      var contour = traceContour(imageData, i);
+      contours.push(contour);
 
-      contours.push(traceContour(imageData, i));
-
-      break;
+      // this could be a _lot_ more efficient
+      contour.forEach(function (c) {
+        seen[c] = true;
+      });
     }
   }
 

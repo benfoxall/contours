@@ -41,6 +41,20 @@ test('neighbours', t => {
 
 })
 
+test('neighbours edge', t => {
+  t.plan(1)
+
+  t.same(
+    contours._.neighbours(
+      {width: 4, height: 4}, 0, 0
+    ),
+    [
+     -1, -4, -3, 1, 5, 4, -1, -1
+    ],
+    "should give neighbours"
+  )
+})
+
 test('offset', t => {
   t.plan(1)
 
