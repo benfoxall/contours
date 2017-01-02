@@ -26,7 +26,7 @@ test('neighbours', t => {
     [
       0, 1, 2, 6, 10, 9, 8, 4
     ],
-    "should give neighbours"
+    'should give neighbours'
   )
 
   t.same(
@@ -36,7 +36,7 @@ test('neighbours', t => {
     [
       1, 2, 6, 10, 9, 8, 4, 0
     ],
-    "should give offset neighbours"
+    'should give offset neighbours'
   )
 
 })
@@ -49,9 +49,9 @@ test('neighbours edge', t => {
       {width: 4, height: 4}, 0, 0
     ),
     [
-     -1, -4, -3, 1, 5, 4, -1, -1
+      -1, -4, -3, 1, 5, 4, -1, -1
     ],
-    "should give neighbours"
+    'should give neighbours'
   )
 })
 
