@@ -53,3 +53,13 @@ test('squares_edge', t => {
 
 
 })
+
+
+test('connected', t => {
+  t.plan(1)
+
+  const found = contours(data.connected)
+
+  t.same(found.length, 1, 'finds a single contour')
+
+})

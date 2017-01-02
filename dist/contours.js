@@ -5,26 +5,59 @@
 }(this, (function () { 'use strict';
 
 var traceContour = function (imageData, i) {
+
   var start = i;
   var contour = [start];
 
-  var direction = 0;
+  var direction = 3;
   var p = start;
 
-  var t = 20;
-  do {
+  var t = 50;
+  while (t-- > 0) {
 
-    var n = neighbours(imageData, p, direction);
-    var pIdx = n.findIndex(function (idx) { return imageData.data[idx * 4]; });
+    var n = neighbours(imageData, p, 0);
 
-    direction = pIdx;
-    p = n[pIdx];
+    // find the first neighbour starting from
+    // the direction we came from
 
-    if(p && p != start) {
+    var next_direction = (void 0);
+
+    var offset = direction - 3 + 8;
+    /*
+    directions:
+      0   1   2
+      7       3
+      6   5   4
+
+    start indexes:
+      5  6   7
+      4      0
+      3  2   1
+    */
+
+    for (var idx = (void 0), i$1 = 0; i$1 < 8; i$1++) {
+      idx = (i$1 + offset) % 8;
+
+      if(imageData.data[n[idx] * 4] > 0) {
+        next_direction = idx;
+        break
+      }
+    }
+
+
+    p = n[next_direction];
+
+    if(p && p !== start) {
       contour.push(p);
     }
 
-  } while (p && p != start && t-- > 0)
+    if(p === start) {
+      break
+    }
+
+    direction = next_direction;
+
+  }
 
 
   return contour
@@ -41,7 +74,7 @@ var neighbours = function (image, i, start) {
     mask[0] = mask[6] = mask[7] = -1;
   }
 
-  if((i+1 % w) === 0) {
+  if(((i+1) % w) === 0) {
     mask[2] = mask[3] = mask[4] = -1;
   }
 
@@ -70,8 +103,10 @@ function contourFinder (imageData) {
   var seen = [];
 
   for (var i = 0; i < imageData.data.length; i++) {
+
     if(imageData.data[i * 4] && ! seen[i]) {
       var contour = traceContour(imageData, i);
+
       contours.push(contour);
 
       // this could be a _lot_ more efficient

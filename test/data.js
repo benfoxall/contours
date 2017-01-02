@@ -57,6 +57,14 @@ exports.stuff = format([
   '_______EEE____________________'
 ])
 
+exports.connected = format([
+  '___AA____',
+  '___AA____',
+  '_AA__AA__',
+  '_AA__AA__',
+])
+
+
 // ImageData-like object
 function format(input) {
   const width = input[0].length
