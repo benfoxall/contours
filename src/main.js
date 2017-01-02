@@ -35,7 +35,7 @@ const neighbours = (image, i, start) => {
     mask[0] = mask[6] = mask[7] = -1
   }
 
-  if((i+1 % w) === 0) {
+  if(((i+1) % w) === 0) {
     mask[2] = mask[3] = mask[4] = -1
   }
 
