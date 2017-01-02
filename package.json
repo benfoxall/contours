@@ -1,0 +1,9 @@
+{
+  "name": "contours",
+  "version": "1.0.0",
+  "description": "A Moore neighbour contour tracer",
+  "main": "index.js",
+  "repository": "git@github.com:benfoxall/contours.git",
+  "author": "Ben Foxall <benfoxall@gmail.com>",
+  "license": "MIT"
+}
