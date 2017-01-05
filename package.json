@@ -1,6 +1,6 @@
 {
   "name": "contours",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Moore neighbour contour tracer",
   "main": "dist/contours.js",
   "main:next": "src/main.js",
