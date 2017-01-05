@@ -63,3 +63,21 @@ test('connected', t => {
   t.same(found.length, 1, 'finds a single contour')
 
 })
+
+
+test('lots', t => {
+  t.plan(1)
+
+  const found = contours(data.stuff)
+
+  t.same(found.length, 5, 'finds all five contours')
+})
+
+
+test('filled', t => {
+  t.plan(1)
+
+  const found = contours(data.large_square)
+
+  t.same(found.length, 1, 'finds a single contour')
+})

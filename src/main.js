@@ -6,16 +6,12 @@ const traceContour = (imageData, i) => {
   let direction = 3
   let p = start
 
-  let t = 50
-  while (t-- > 0) {
+  while(true) {
 
     const n = neighbours(imageData, p, 0)
 
     // find the first neighbour starting from
     // the direction we came from
-
-    let next_direction
-
     let offset = direction - 3 + 8
     /*
     directions:
@@ -29,30 +25,25 @@ const traceContour = (imageData, i) => {
       3  2   1
     */
 
+    direction = -1
     for (let idx, i = 0; i < 8; i++) {
       idx = (i + offset) % 8
 
       if(imageData.data[n[idx] * 4] > 0) {
-        next_direction = idx
+        direction = idx
         break
       }
     }
 
+    p = n[direction]
 
-    p = n[next_direction]
-
-    if(p && p !== start) {
+    if(p === start || !p) {
+      break
+    } else {
       contour.push(p)
     }
 
-    if(p === start) {
-      break
-    }
-
-    direction = next_direction
-
   }
-
 
   return contour
 }
@@ -97,18 +88,28 @@ function contourFinder (imageData) {
 
   const contours = []
   const seen = []
+  let skipping = false
 
   for (var i = 0; i < imageData.data.length; i++) {
 
-    if(imageData.data[i * 4] && ! seen[i]) {
-      var contour = traceContour(imageData, i)
+    if(imageData.data[i * 4] > 128) {
+      if(seen[i] || skipping) {
+        skipping = true
 
-      contours.push(contour)
+      } else {
+        var contour = traceContour(imageData, i)
 
-      // this could be a _lot_ more efficient
-      contour.forEach(c => {
-        seen[c] = true
-      })
+        contours.push(contour)
+
+        // this could be a _lot_ more efficient
+        contour.forEach(c => {
+          seen[c] = true
+        })
+
+      }
+
+    } else {
+      skipping = false
     }
   }
 
