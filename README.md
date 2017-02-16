@@ -7,7 +7,7 @@ It uses Moore Neighbourhood contour tracing. For more details on the algorithm/a
 ```js
 const output = contours(imageData)
 
-// list of marching contours
+// list of matching contours
 ```
 
 * imageData should be thresholded (any non-zero pixel is counted as _on_)
