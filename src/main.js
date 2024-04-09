@@ -105,7 +105,8 @@ function contourFinder (imageData) {
         contour.forEach(c => {
           seen[c] = true
         })
-
+        
+        skipping = true
       }
 
     } else {
