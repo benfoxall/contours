@@ -109,7 +109,8 @@ function contourFinder (imageData) {
         contour.forEach(function (c) {
           seen[c] = true;
         });
-
+        
+        skipping = true;
       }
 
     } else {
