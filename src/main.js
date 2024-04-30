@@ -90,7 +90,7 @@ function contourFinder (imageData) {
   const seen = []
   let skipping = false
 
-  for (var i = 0; i < imageData.data.length; i++) {
+  for (var i = 0; i < imageData.data.length/4; i++) {
 
     if(imageData.data[i * 4] > 128) {
       if(seen[i] || skipping) {
